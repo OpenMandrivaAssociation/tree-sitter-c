@@ -37,11 +37,11 @@ Requires:   %{libname} = %{EVRD}
 Development files (Headers etc.) for %{name}
 
 # ───────────────────────────────────────────────────────────────────────────── #
-./BUILD/lib64tree-sitter-c-0.23.2-build/lib64tree-sitter-c-0.23.2/tree-sitter-c-0.23.2
 %prep
-%setup -C
+%setup -c
 
-%{echo:"Building %{libname} %{ERVD} }
+mv tree-sitter-%{tslanguage}-%{version}/* .
+
 
 # ───────────────────────────────────────────────────────────────────────────── #
 

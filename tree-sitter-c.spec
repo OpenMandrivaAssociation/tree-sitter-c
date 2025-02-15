@@ -37,11 +37,11 @@ Requires:   %{libname} = %{EVRD}
 Development files (Headers etc.) for %{name}
 
 # ───────────────────────────────────────────────────────────────────────────── #
-
+./BUILD/lib64tree-sitter-c-0.23.2-build/lib64tree-sitter-c-0.23.2/tree-sitter-c-0.23.2
 %prep
-%autosetup -C
-%{echo:"Building %{libname} %{ERVD} }
+%setup -C
 
+%{echo:"Building %{libname} %{ERVD} }
 
 # ───────────────────────────────────────────────────────────────────────────── #
 
@@ -76,6 +76,7 @@ for lib in $libs; do
     ln -s -r "%{buildroot}%{_libdir}/${lib}" \
         "%{buildroot}%{_libdir}/tree_sitter/${shortname}.so"
 done
+
 
 
 

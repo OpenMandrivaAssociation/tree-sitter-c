@@ -37,10 +37,10 @@ Requires:   %{libname} = %{EVRD}
 Development files (Headers etc.) for %{name}
 
 # ───────────────────────────────────────────────────────────────────────────── #
-
 %prep
-%autosetup -C
-%{echo:"Building %{libname} %{ERVD} }
+%setup -c
+
+mv tree-sitter-%{tslanguage}-%{version}/* .
 
 
 # ───────────────────────────────────────────────────────────────────────────── #
@@ -76,6 +76,7 @@ for lib in $libs; do
     ln -s -r "%{buildroot}%{_libdir}/${lib}" \
         "%{buildroot}%{_libdir}/tree_sitter/${shortname}.so"
 done
+
 
 
 

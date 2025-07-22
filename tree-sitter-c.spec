@@ -2,39 +2,50 @@
 %define     debug_package   %{nil}
 
 %define     tslanguage  c
-%define     libname %mklibname tree-sitter-c 
+%define		name_nolib tree-sitter-c
+%define     libname %mklibname %{name} 
 %define     devname %mklibname tree-sitter-c 
+%define		develname	%{libname}-devel	
+%define		staticname	%{libname}-static
 
-Name:       %{libname} 
-Version:    0.23.2 
+Name:       tree-sitter-c 
+Version:    0.24.1 
 Release:    1
-SOURCE0:    https://github.com/tree-sitter/tree-sitter-c/archive/v%{version}.tar.gz
+SOURCE0:    https://github.com/tree-sitter/tree-sitter-c/archive/v%{version}/%{name_nolib}-%{version}.tar.gz
 Summary:    Tree-sitter C parser library   
 URL:        https://github.com/tree-sitter/tree-sitter-c
 License:    MIT 
 Group:      System/Libraries/C_C++
 
+%description 
+tree-sitter C parser library README and LICENSE
+
+%package	-n %{libname}
+Summary:    Tree-sitter C parser library   
+Requires:	tree-sitter-c
 Provides:   %{libname} = %{EVRD}
 
-%description
+
+%description -n %{libname}
 Tree-sitter C parser library
 
 # ───────────────────────────────────────────────────────────────────────────── #
-%package    static 
-
+%package    -n %{staticname}
 Summary:    Tree-sitter C parser static library 
+Requires:	tree-sitter-c
 
-%description static
+%description -n %{staticname}
 Tree-sitter C parser static library
 
 # ───────────────────────────────────────────────────────────────────────────── #
 
-%package    devel
-Summary:    Development files for %{name}
+%package    -n %{develname} 
+Summary:    Development files for %{libname}
 Requires:   %{libname} = %{EVRD}
+Requires:	tree-sitter-c
 
-%description devel
-Development files (Headers etc.) for %{name}
+%description -n %{develname}
+Development files (Headers etc.) for %{libname}
 
 # ───────────────────────────────────────────────────────────────────────────── #
 %prep
@@ -79,27 +90,27 @@ done
 
 
 
-
-# ───────────────────────────────────────────────────────────────────────────── #
-
 %files 
-%{_libdir}/*.so.*
-%{_libdir}/tree_sitter/*.so
 %license  LICENSE*
 %doc README*
 
 # ───────────────────────────────────────────────────────────────────────────── #
 
-%files devel
-%{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/*
-%license  LICENSE*
-%doc    README*
+%files -n %{libname} 
+%{_libdir}/*.so.*
+%{_libdir}/tree_sitter/*.so
 
 # ───────────────────────────────────────────────────────────────────────────── #
 
-%files static
+%files -n %{develname} 
+%{_includedir}/*
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/*
+
+# ───────────────────────────────────────────────────────────────────────────── #
+
+%files -n %{staticname} 
 %{_libdir}/libtree-sitter-c*.a
+
 
 
